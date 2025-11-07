@@ -8,3 +8,4 @@ firebase
 archive
 .vscode
 anchor.toml
+.env

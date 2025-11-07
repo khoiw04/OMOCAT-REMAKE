@@ -35,23 +35,26 @@ declare module '@tanstack/react-router' {
 }
 
 const queryClient = new QueryClient()
-const data = await supabase.from("item").select("*")
 
-
-// Render the app
-const rootElement = document.getElementById('wait___tanstack-start')
-if (rootElement && !rootElement.innerHTML) {
-  const root = createRoot(rootElement)
-  const auth = useAuth()
-  root.render(
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} context={{ authentication: auth, queryClient: queryClient, item: data }} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </StrictMode>
-  )
+async function bootstrap() {
+  // Render the app
+  const data = await supabase.from("item").select("*")
+  const rootElement = document.getElementById('wait___tanstack-start')
+  if (rootElement && !rootElement.innerHTML) {
+    const root = createRoot(rootElement)
+    const auth = useAuth()
+    root.render(
+      <StrictMode>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} context={{ authentication: auth, queryClient: queryClient, item: data }} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </StrictMode>
+    )
+  }
 }
+
+bootstrap()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

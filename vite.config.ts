@@ -11,10 +11,6 @@ import { compression } from 'vite-plugin-compression2'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
-const ReactCompilerConfig = {
-  target: '19' // '17' | '18' | '19'
-};
-
 const DEFAULT_OPTIONS = {
   test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
   exclude: undefined,
