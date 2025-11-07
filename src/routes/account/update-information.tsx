@@ -3,7 +3,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 // https://github.com/orgs/supabase/discussions/1066
 import { useEffect, useState } from 'react'
 import { any, nonEmpty, object, pipe, regex, string } from 'valibot'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm, useStore } from '@tanstack/react-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import type {StandardSchemaV1Issue} from '@tanstack/react-form'
@@ -111,6 +111,24 @@ function Update() {
                 zip: s.zip,
                 phone: s.phone
               })
+              await supabase.auth.updateUser({
+                data: {
+                  first_name: s.first,
+                  last_name: s.last,
+                }
+              })
+              await supabase.from('users').upsert({
+                id: data.user?.id,
+                email: s.email,
+                first_name: s.first,
+                last_name: s.last,
+                address_1: s.address1,
+                address_2: s.address2,
+                country: s.country,
+                province: s.province,
+                zip: s.zip,
+                phone: s.phone
+              })
           }
           )()
         ])
@@ -206,6 +224,7 @@ function Update() {
         if (typeof authContext === 'object' && typeof authContext.signOut === 'function') {
           authContext.signOut()
         }
+        
         navigation({ to: "/", replace: true })
         document.body.style.cursor = 'auto'
       },
