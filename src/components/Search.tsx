@@ -11,6 +11,7 @@ import { Close, Load, SearchIcon } from "@/data/SVG"
 import { supabase } from "@/supabase/supabase"
 import { formatCurrency, getPrice } from "@/utils/format-currency"
 import { useZustandStore } from "@/zustand/main"
+import { Link } from "@tanstack/react-router"
 
 export default function Main() {
 
@@ -187,8 +188,9 @@ export function Result() {
 
             return (
             <li key={`search!____${i}`} className="w-full table text-left *:table-cell *:float-left *:nth-[2]:pl-8">
-              <a
-                href="https://www.youtube.com/watch?v=b-mgca_2Oe4"
+              <Link
+                to="/products/$productId"
+                params={{ productId: s_.id }}
                 className="w-2/6 2xl:w-1/5 hover:opacity-90 mt-2 sm:mt-0"
               >
                 <img
@@ -196,7 +198,7 @@ export function Result() {
                   src={s_.img[0].src}
                   alt={s_.img[0].alt}
                 />
-              </a>
+              </Link>
               <div className="w-4/6">
                 <h2 className="text-lg md:text-[calc(1vmin+10px)] capitalize">{s_.title}</h2>
                 <h3 className="text-sm md:text-[calc(0.6vmin+8px)] xl:mt-2">{formatCurrency(selectedCountry?.lang, selectedCountry?.transfer, Number(convertedPrice))}</h3>
