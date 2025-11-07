@@ -1,10 +1,11 @@
 import { ListSubItemDisplay } from '@/components/Lists'
 import { currencyOffScript, type ItemInformation } from '@/data/data'
+import { supabase } from '@/supabase/supabase'
 import { formatCurrency } from '@/utils/format-currency'
 import { getPriceItems, prefetchInfinte, useItems } from '@/utils/queries'
 import { useCountryCodeStore } from '@/zustand/countryCode-slice'
 import { useZustandStore } from '@/zustand/main'
-import { createFileRoute, useRouteContext } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { Fragment, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useStore } from 'zustand'
@@ -12,12 +13,16 @@ import { useShallow } from 'zustand/react/shallow'
 
 export const Route = createFileRoute('/')({
   component: App,
+  loader: async () => {
+    const { data } = await supabase.from('item').select('*')
+    return data as Array<ItemInformation>
+  },
 })
 
 function App() {
-  const { item } = useRouteContext({ from: '/' })
-  prefetchInfinte(item.data as Array<ItemInformation>)
-  const { data, error, fetchNextPage } = useItems(item.data as Array<ItemInformation>)  
+  const item = Route.useLoaderData()
+  prefetchInfinte(item)
+  const { data, error, fetchNextPage } = useItems(item)  
   const { countryCode } = useCountryCodeStore()
   const selectedCountry = currencyOffScript.find(a => a.code === countryCode)
   const currency = useStore(useZustandStore,

@@ -3,7 +3,7 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 // https://github.com/orgs/supabase/discussions/1066
 import { useEffect, useState } from 'react'
 import { any, nonEmpty, object, pipe, regex, string } from 'valibot'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useForm, useStore } from '@tanstack/react-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import type {StandardSchemaV1Issue} from '@tanstack/react-form'

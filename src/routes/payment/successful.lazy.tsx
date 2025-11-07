@@ -1,10 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { CheckBadge } from '@/data/SVG'
 import { useZustandStore } from '@/zustand/main'
 
-export const Route = createFileRoute('/payment/successful')({
+export const Route = createLazyFileRoute('/payment/successful')({
   component: PaymentSuccessful,
 })
 

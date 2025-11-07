@@ -263,7 +263,7 @@ function FAQ() {
             please contact us at:
             <br />
             <br />
-            Email: support@khoi.store
+            Email: support@omocat.remake
           </p>
         </section>
       </article>

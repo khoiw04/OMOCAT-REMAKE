@@ -1,6 +1,6 @@
 import { stripe } from "@/api/stripe/!_main_!"
 
-const endpointSecret = import.meta.env.STRIPE_DESTINATION_KEY as string
+const endpointSecret = process.env.STRIPE_DESTINATION_KEY as string
 
 export async function captureCheckout(request: Request): Promise<Response> {
     let event;

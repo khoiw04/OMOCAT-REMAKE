@@ -139,7 +139,7 @@ export default function Navbar() {
             <>
             <CurrencyItem />
             <BurgerItem />
-            <Link to="/" className="font-bold">khoi.store</Link>
+            <Link to="/" className="font-bold">OMOCAT</Link>
             <Items />
             </>
         }

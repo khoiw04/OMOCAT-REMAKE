@@ -2,7 +2,7 @@
 // https://michalkotowski.pl/writings/how-to-refresh-a-react-component-when-local-storage-has-changed
 // https://www.omocat-shop.com/collections/all/products/omocat-original-characters-acrylic-blocks?variant=41536329449585
 // Cache: https://github.com/TanStack/query/discussions/92
-import { Link, createFileRoute, useRouteContext } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { Fragment } from 'react/jsx-runtime'
 import DOMPurify from 'dompurify'
 import { useStore as useStoreValue } from "zustand"
@@ -24,55 +24,93 @@ import "@/styles/RadialMenu.sass"
 import { formatCurrency, getPrice } from '@/utils/format-currency'
 import { henry_stick_roll, stupid_henry } from '@/data/img'
 import { useZustandStore } from '@/zustand/main'
+import { supabase } from '@/supabase/supabase'
 import { seo } from '@/utils/seo'
+import appCss from '@/styles/styles.css?url'
 
 export const Route = createFileRoute('/products/$productId')({
   component: RouteComponent,
   loader: async ({ params: { productId }, context }) => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      const s = await context.queryClient.getQueryData(["items",["allItems"]]) as any
-      
-      if (s) {
-        return s.pages[0].data.find((item: { id: string }) => item.id === productId)
-      } else {
-        return await context.queryClient.ensureQueryData(
-          {
-              queryKey: ["items", productId],
-              queryFn: () => {
-                  const { data, error } = context.item
-  
-                  if (error) return
-  
-                  return data.find(item => item.id === productId)
+    const { data, error } = await supabase.from('item').select('*')
+    return await context.queryClient.ensureQueryData(
+      {
+          queryKey: ["items", productId],
+          queryFn: () => {
+
+              if (error) return {
+                items: [], 
+                product: {
+                  alt: '',
+                  day: '',
+                  description: '',
+                  group: '',
+                  id: '',
+                  img: [],
+                  link: '',
+                  messageHTML: '',
+                  NoteNotRed: '',
+                  NoteRed: '',
+                  price: '',
+                  size: [],
+                  sizeGuide: [],
+                  tax_code: '',
+                  title: '',
+                  tag: '',
+                  type: ''
+                }
+              }
+
+              return {
+                items: data as Array<ItemInformation>, 
+                product: data.find(item => item.id === productId) as ItemInformation
               }
           }
-        )
       }
+    )
   },
   errorComponent: () => <></>,
-  head: () => {
-    const tags = seo({
-      title: 'TanStack Start | Type-Safe, Client-First, Full-Stack React Framework',
-      description: 'TanStack Start is a type-safe, client-first, full-stack React framework.',
-    })
-
-    const titleTag = tags.find(tag => 'title' in tag)?.title
-    const metaTags = tags.filter(tag => !('title' in tag))
-
-    return {
-      title: titleTag,
-      meta: [
-        { charSet: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        ...metaTags,
-      ],
-    }
-  },
+  head: (ctx) => ({
+    meta: [
+      {
+        charSet: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      ...seo({
+        title:
+          `${ctx.loaderData?.product.title ?? 'Unknown'} - OMOCAT Remake Store`,
+        description: `“OMOCAT Shop” is an independent fashion brand based in Los Angeles, known for its bold fusion of anime aesthetics, pixel art, and streetwear culture. Founded by the artist OMOCAT, the brand has built a passionate global following through its expressive designs and collaborations with iconic names in pop culture.`,
+      }),
+    ],
+    links: [
+      { rel: 'stylesheet', href: appCss },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png',
+      },
+      { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
+      { rel: 'icon', href: '/favicon.ico' },
+    ]
+  }),
 })
 
 function RouteComponent() {
-  const asfasfasfafsasfas = Route.useLoaderData()
-  const product = asfasfasfafsasfas as ItemInformation
+  const { product } = Route.useLoaderData()
 
   const form = useForm({
     defaultValues: {
@@ -343,8 +381,8 @@ function RouteComponent() {
 }
 
 function Info() {
-  const data = Route.useLoaderData()
-  const product = data as ItemInformation
+  const { product } = Route.useLoaderData()
+
   return (
     <>
       <div className='pt-2 | *:inline-block indent-0.75 | text-neutral-400'>
@@ -358,8 +396,7 @@ function Info() {
 }
 
 function Description() {
-  const data = Route.useLoaderData()
-  const product = data as ItemInformation
+  const { product } = Route.useLoaderData()
 
   return (
     <>
@@ -411,8 +448,7 @@ function Image() {
   const verySmooth = useSpring(movement, options)
   const timelineSmooth = useSpring(timeline, options)
 
-  const data = Route.useLoaderData()
-  const product = data as ItemInformation
+  const { product } = Route.useLoaderData()
 
   useEffect(() => {
     if (dimension.width < 1008) return
@@ -742,8 +778,7 @@ function Board({ num, set } : { num: number, set: React.Dispatch<React.SetStateA
     }
   }, [angle, setState, state.click])
 
-  const data = Route.useLoaderData()
-  const product = data as ItemInformation
+  const { product } = Route.useLoaderData()
   const name = ['Back','Reload','Print','Forward']
   const svg = [Back,Reload,Print,Forward,Save,Inspect]
   const length = Math.min(name.length, svg.length)
@@ -815,12 +850,7 @@ function Board({ num, set } : { num: number, set: React.Dispatch<React.SetStateA
 function More() {
   const dimension = useDimension()
   const { countryCode } = useCountryCodeStore()
-  const asfasfasfafsasfas = Route.useLoaderData()
-  const product = asfasfasfafsasfas as ItemInformation
-  const { item } = useRouteContext({
-    from: '/products/$productId'
-  })
-
+  const { product, items } = Route.useLoaderData()
   
   const container = useRef<HTMLDivElement | null>(null)
   const [width, setWidth] = useState(0)
@@ -835,11 +865,9 @@ function More() {
   )
 
   const timeoutRef = useRef<NodeJS.Timeout>(null)
+  const filter = items.filter(p => p.tag === product.tag && p.group === product.group).slice(0, 4)
 
-  const data = item.data as Array<ItemInformation>
-  const filter = data.filter(p => p.tag === product.tag && p.group === product.group).slice(0, 4)
-
-  const allItems = data.flatMap(page => page)
+  const allItems = items.flatMap(page => page)
   const selectedCountry = currencyOffScript.find(s => s.code === countryCode)
 
   const keyPrice = new Map()

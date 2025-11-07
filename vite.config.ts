@@ -1,15 +1,12 @@
-// import fs from 'node:fs'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import preload from 'vite-plugin-preload'
 import tailwindcss from '@tailwindcss/vite'
-import { analyzer } from 'vite-bundle-analyzer'
-// import viteTsConfigPaths from 'vite-tsconfig-paths'
-import { compression } from 'vite-plugin-compression2'
-// import { defineConfig } from '@tanstack/react-start/config'
+import viteReact from '@vitejs/plugin-react'
+import tsConfigPaths from 'vite-tsconfig-paths'
+import { cloudflare } from "@cloudflare/vite-plugin"
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 
 const DEFAULT_OPTIONS = {
   test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
@@ -81,13 +78,15 @@ export default defineConfig(({ mode }) => {
   
   return {
     plugins: [
-      TanStackRouterVite({ autoCodeSplitting: true, target: 'react' }),
-      react(),
       tailwindcss(),
-      isProduction && compression(),
-      isProduction && analyzer(),
+      tanstackStart(),
+      viteReact(),
+      tsConfigPaths({
+        projects: ['./tsconfig.json'],
+      }),
+      cloudflare({ viteEnvironment: { name: 'ssr' } }),
       isProduction && preload(),
-      isProduction && ViteImageOptimizer(DEFAULT_OPTIONS),
+      isProduction && ViteImageOptimizer(DEFAULT_OPTIONS)
     ],
     resolve: {
       alias: {
@@ -153,7 +152,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/api/, '')
         },
         '/api': {
-          target: 'http://localhost:3000',
+          target: 'http://localhost:3001',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         },

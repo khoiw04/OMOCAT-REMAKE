@@ -52,7 +52,7 @@ function Terms() {
         <section id='OVERVIEW' className='pt-20 sm:pt-40'>
           <h3 tabIndex={0} className={`sm:text-[calc(6px+3vmin)] text-[calc(20px+3vmin)] w-fit ${activeSection == 'OVERVIEW' ? 'border-b-2 border-yellow-500' : ''}`}>Overview</h3>
           <p className='pt-8 | text-[calc(10px+2vmin)] sm:text-[calc(8px+1.03vmin)]'>
-            khoi.store,
+            omocat.remake,
             is a shopping website owned by khoiw04.<br />
             All information provided on the website is for shopping purposes only.<br />
             You can submit a contact form through on our Social Media / Email,<br />
@@ -62,7 +62,7 @@ function Terms() {
         <section id='Target' className='pt-20 sm:pt-30'>
           <h3 tabIndex={0} className={`sm:text-[calc(6px+3vmin)] text-[calc(20px+3vmin)] w-fit ${activeSection == 'Target' ? 'border-b-2 border-yellow-500' : ''}`}>Target Audience</h3>
           <p className='pt-8 | text-[calc(10px+2vmin)] sm:text-[calc(8px+1.03vmin)]'>
-            khoi.store primarily <i>provides services</i> <br /> to any <b>individual or organization.</b><br />
+            omocat.remake primarily <i>provides services</i> <br /> to any <b>individual or organization.</b><br />
             with no strict differentiation<br /> between business clients and private individuals.
           </p>
         </section>
@@ -103,7 +103,7 @@ function Terms() {
             please contact us at:
             <br />
             <br />
-            Email: business@khoi.store
+            Email: business@omocat.remake
           </p>
         </section>
       </article>

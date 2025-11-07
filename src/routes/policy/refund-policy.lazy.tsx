@@ -59,7 +59,7 @@ function Ship() {
         <section id='Damaged' className='pt-20 sm:pt-30'>
           <h3 tabIndex={0} className={`sm:text-[calc(6px+3vmin)] text-[calc(20px+3vmin)] w-fit`}>My item arrived damaged / <br /> This isn't what I ordered</h3>
           <p className='pt-8 | text-[calc(10px+2vmin)] sm:text-[calc(8px+1.03vmin)]'>
-            Please <b><i>send an e-mail</i></b> to support@khoi.store within <a href="#ReturnPeriod" className='underline underline-offset-4' onClick={smoothScroll}>14 days of delivery</a> <br />
+            Please <b><i>send an e-mail</i></b> to support@omocat.remake within <a href="#ReturnPeriod" className='underline underline-offset-4' onClick={smoothScroll}>14 days of delivery</a> <br />
             and we will take care of it at <b><i>no cost to you</i></b>.<br />
             <br />
           </p>
@@ -85,7 +85,7 @@ function Ship() {
             <i>It is essential to double-check your product during the checkout process.</i><br />
             <br />
             Customer <b><i>has 2 hours</i></b> after their order to change its content by contacting customer service<br />
-            at customer@khoi.store.<br />
+            at customer@omocat.remake<br />
             <br />
             Please review your order confirmation email to confirm the accuracy of your order.
           </p>
@@ -97,7 +97,7 @@ function Ship() {
             please contact us at:
             <br />
             <br />
-            Email: support@khoi.store
+            Email: support@omocat.remake
           </p>
         </section>
       </article>

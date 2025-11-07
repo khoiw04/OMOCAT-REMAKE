@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia'
+import { cors } from '@elysiajs/cors'
 import { deleteAccount } from './stripe/delete'
 import { createAccount } from './stripe/register'
 import { updateInformation } from './stripe/update'
@@ -8,6 +9,11 @@ import { createCheckoutSession } from './stripe/create-checkout-session'
 import { cancelRefund, createFullRefundOrder } from './stripe/refund'
 
 new Elysia()
+    .use(cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    }))
     .post('/create-account', (request: Request) => createAccount(request))
     .delete('/delete-account', (request: Request) => deleteAccount(request))
     .post('/get-information', (request: Request) => getInformation(request))
@@ -16,4 +22,4 @@ new Elysia()
     .post('/update-account', (request: Request) => updateInformation(request))
     .post('/create-checkout-session', (request: Request) => createCheckoutSession(request))
     .post('/capture-checkout-session', (request: Request) => captureCheckout(request))
-    .listen(3001)
+    .listen(3001)    

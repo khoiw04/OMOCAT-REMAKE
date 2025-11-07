@@ -260,7 +260,7 @@ function Privacy() {
             please contact us at:
             <br />
             <br />
-            Email: business@khoi.store
+            Email: business@omocat.remake
           </p>
         </section>
       </article>

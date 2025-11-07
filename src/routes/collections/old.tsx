@@ -1,5 +1,5 @@
 import { Fragment, lazy, useEffect } from "react"
-import { createLazyFileRoute, useRouteContext } from '@tanstack/react-router'
+import { useRouteContext, createFileRoute } from '@tanstack/react-router'
 import { useStore } from "zustand"
 import { useInView } from 'react-intersection-observer'
 import { useShallow } from "zustand/react/shallow"
@@ -10,21 +10,24 @@ import { currencyOffScript } from "@/data/data"
 import { useCountryCodeStore } from "@/zustand/countryCode-slice"
 import { useZustandStore } from "@/zustand/main"
 import { getPriceItems, prefetchInfinte, useItems } from "@/utils/queries"
+import { supabase } from "@/supabase/supabase"
 
 const ListSubItemDisplay = lazy(() => 
   import('@/components/Lists').then(module => ({ default: module.ListSubItemDisplay }))
 )
 
-export const Route = createLazyFileRoute('/collections/old')({
+export const Route = createFileRoute('/collections/old')({
   component: Collections,
+  loader: async () => {
+    const { data } = await supabase.from('item').select('*')
+    return data as Array<ItemInformation>
+  },
 })
 
 function Collections() {
-  const { item } = useRouteContext({
-      from: '/collections/old'
-  })
-  prefetchInfinte(item.data as Array<ItemInformation>)
-  const { data, error, fetchNextPage } = useItems(item.data as Array<ItemInformation>)
+  const item = Route.useLoaderData()
+  prefetchInfinte(item)
+  const { data, error, fetchNextPage } = useItems(item)
 
   const { countryCode } = useCountryCodeStore()
   const selectedCountry = currencyOffScript.find(a => a.code === countryCode)

@@ -65,7 +65,7 @@ function Refund() {
           <p className='pt-8 | text-[calc(10px+2vmin)] sm:text-[calc(8px+1.03vmin)]'>
             <i>It is essential to double-check your information during the checkout process.</i><br />
             <br />
-            Customer has 2 hours after their order to change its content by contacting <a href="mailto:customer@khoi.store" className='underline underline-offset-4 underline-'>customer@khoi.store</a><br />
+            Customer has 2 hours after their order to change its content by contacting <a href="mailto:customer@omocat.remake" className='underline underline-offset-4 underline-'>customer@omocat.remake</a><br />
             <br />
             Please review your order confirmation email to confirm the accuracy of your order.<br />
             <br />
@@ -87,7 +87,7 @@ function Refund() {
             please contact us at:
             <br />
             <br />
-            Email: support@khoi.store
+            Email: support@omocat.remake
           </p>
         </section>
       </article>

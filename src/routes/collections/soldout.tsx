@@ -11,17 +11,20 @@ import { currencyOffScript } from '@/data/data'
 import { useCountryCodeStore } from "@/zustand/countryCode-slice"
 import { useZustandStore } from '@/zustand/main'
 import { getPriceItems, prefetchInfinte, useItems } from '@/utils/queries'
+import { supabase } from '@/supabase/supabase'
 
 export const Route = createFileRoute('/collections/soldout')({
   component: RouteComponent,
+  loader: async () => {
+    const { data } = await supabase.from('item').select('*')
+    return data as Array<ItemInformation>
+  },
 })
 
 function RouteComponent() {
-  const { item } = useRouteContext({
-      from: '/collections/soldout'
-  })
-  prefetchInfinte(item.data as Array<ItemInformation>)
-  const { data, error, fetchNextPage } = useItems(item.data as Array<ItemInformation>)
+  const item = Route.useLoaderData()
+  prefetchInfinte(item)
+  const { data, error, fetchNextPage } = useItems(item)
 
   const { countryCode } = useCountryCodeStore()
   const selectedCountry = currencyOffScript.find(a => a.code === countryCode)

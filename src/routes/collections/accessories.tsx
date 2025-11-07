@@ -1,5 +1,5 @@
 import { Fragment, lazy, useEffect } from "react"
-import { createFileRoute, useRouteContext } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { useInView } from 'react-intersection-observer'
 import { useShallow } from "zustand/react/shallow"
 import { useStore } from "zustand"
@@ -17,14 +17,18 @@ const ListSubItemDisplay = lazy(() =>
 )
 
 export const Route = createFileRoute('/collections/accessories')({
-  component: Collections
+  component: Collections,
+  loader: async () => {
+    const { data } = await supabase.from('item').select('*')
+    return data as Array<ItemInformation>
+  },
 })
 
-async function Collections() {
-  const item = await supabase.from("item").select("*")
+function Collections() {
+  const item = Route.useLoaderData()
 
-  prefetchInfinte(item.data as Array<ItemInformation>)
-  const { data, error, fetchNextPage } = useItems(item.data as Array<ItemInformation>)
+  prefetchInfinte(item)
+  const { data, error, fetchNextPage } = useItems(item)
 
   const { countryCode } = useCountryCodeStore()
   const selectedCountry = currencyOffScript.find(a => a.code === countryCode)

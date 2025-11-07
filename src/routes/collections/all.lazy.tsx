@@ -2,7 +2,7 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import { ListItemDisplay, ListMainFrame } from '@/components/Lists'
 
 export const Route = createLazyFileRoute('/collections/all')({
-  component: All,
+  component: All
 })
 
 const data = [

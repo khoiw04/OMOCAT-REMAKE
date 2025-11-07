@@ -152,12 +152,11 @@ export default function Cart() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                body: JSON.stringify(s)
+                    body: JSON.stringify(s)
                 })
 
                 if (!response.ok) {
                     const err = await response.text()
-                    console.error('Stripe error:', err)
                     throw new Error(err)
                 }
 

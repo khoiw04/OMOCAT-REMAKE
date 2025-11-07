@@ -10,364 +10,209 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccountIndexRouteImport } from './routes/account/index'
+import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
+import { Route as CollectionsSoldoutRouteImport } from './routes/collections/soldout'
+import { Route as CollectionsOldRouteImport } from './routes/collections/old'
+import { Route as CollectionsNewRouteImport } from './routes/collections/new'
+import { Route as CollectionsAccessoriesRouteImport } from './routes/collections/accessories'
+import { Route as AccountUpdateInformationRouteImport } from './routes/account/update-information'
+import { Route as AccountRegisterRouteImport } from './routes/account/register'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as AccountIndexImport } from './routes/account/index'
-import { Route as ProductsProductIdImport } from './routes/products/$productId'
-import { Route as PaymentSuccessfulImport } from './routes/payment/successful'
-import { Route as CollectionsSoldoutImport } from './routes/collections/soldout'
-import { Route as CollectionsAccessoriesImport } from './routes/collections/accessories'
-import { Route as AccountUpdateInformationImport } from './routes/account/update-information'
-import { Route as AccountRegisterImport } from './routes/account/register'
-
-// Create Virtual Routes
-
-const PolicyTermsConditionsLazyImport = createFileRoute(
+const PolicyTermsConditionsLazyRouteImport = createFileRoute(
   '/policy/terms-conditions',
 )()
-const PolicyShippingPolicyLazyImport = createFileRoute(
+const PolicyShippingPolicyLazyRouteImport = createFileRoute(
   '/policy/shipping-policy',
 )()
-const PolicyRefundPolicyLazyImport = createFileRoute('/policy/refund-policy')()
-const PolicyPrivacyPolicyLazyImport = createFileRoute(
+const PolicyRefundPolicyLazyRouteImport = createFileRoute(
+  '/policy/refund-policy',
+)()
+const PolicyPrivacyPolicyLazyRouteImport = createFileRoute(
   '/policy/privacy-policy',
 )()
-const InfoAboutLazyImport = createFileRoute('/info/about')()
-const InfoFAQLazyImport = createFileRoute('/info/FAQ')()
-const CollectionsOldLazyImport = createFileRoute('/collections/old')()
-const CollectionsNewLazyImport = createFileRoute('/collections/new')()
-const CollectionsAllLazyImport = createFileRoute('/collections/all')()
-const AccountUpdatePasswordLazyImport = createFileRoute(
+const PaymentSuccessfulLazyRouteImport = createFileRoute(
+  '/payment/successful',
+)()
+const InfoAboutLazyRouteImport = createFileRoute('/info/about')()
+const InfoFAQLazyRouteImport = createFileRoute('/info/FAQ')()
+const CollectionsAllLazyRouteImport = createFileRoute('/collections/all')()
+const AccountUpdatePasswordLazyRouteImport = createFileRoute(
   '/account/update-password',
 )()
 
-// Create/Update Routes
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AccountIndexRoute = AccountIndexImport.update({
+const AccountIndexRoute = AccountIndexRouteImport.update({
   id: '/account/',
   path: '/account/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PolicyTermsConditionsLazyRoute = PolicyTermsConditionsLazyImport.update({
-  id: '/policy/terms-conditions',
-  path: '/policy/terms-conditions',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/policy/terms-conditions.lazy').then((d) => d.Route),
-)
-
-const PolicyShippingPolicyLazyRoute = PolicyShippingPolicyLazyImport.update({
-  id: '/policy/shipping-policy',
-  path: '/policy/shipping-policy',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/policy/shipping-policy.lazy').then((d) => d.Route),
-)
-
-const PolicyRefundPolicyLazyRoute = PolicyRefundPolicyLazyImport.update({
+const PolicyTermsConditionsLazyRoute =
+  PolicyTermsConditionsLazyRouteImport.update({
+    id: '/policy/terms-conditions',
+    path: '/policy/terms-conditions',
+    getParentRoute: () => rootRouteImport,
+  } as any).lazy(() =>
+    import('./routes/policy/terms-conditions.lazy').then((d) => d.Route),
+  )
+const PolicyShippingPolicyLazyRoute =
+  PolicyShippingPolicyLazyRouteImport.update({
+    id: '/policy/shipping-policy',
+    path: '/policy/shipping-policy',
+    getParentRoute: () => rootRouteImport,
+  } as any).lazy(() =>
+    import('./routes/policy/shipping-policy.lazy').then((d) => d.Route),
+  )
+const PolicyRefundPolicyLazyRoute = PolicyRefundPolicyLazyRouteImport.update({
   id: '/policy/refund-policy',
   path: '/policy/refund-policy',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/policy/refund-policy.lazy').then((d) => d.Route),
 )
-
-const PolicyPrivacyPolicyLazyRoute = PolicyPrivacyPolicyLazyImport.update({
+const PolicyPrivacyPolicyLazyRoute = PolicyPrivacyPolicyLazyRouteImport.update({
   id: '/policy/privacy-policy',
   path: '/policy/privacy-policy',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/policy/privacy-policy.lazy').then((d) => d.Route),
 )
-
-const InfoAboutLazyRoute = InfoAboutLazyImport.update({
+const PaymentSuccessfulLazyRoute = PaymentSuccessfulLazyRouteImport.update({
+  id: '/payment/successful',
+  path: '/payment/successful',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/payment/successful.lazy').then((d) => d.Route),
+)
+const InfoAboutLazyRoute = InfoAboutLazyRouteImport.update({
   id: '/info/about',
   path: '/info/about',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/info/about.lazy').then((d) => d.Route))
-
-const InfoFAQLazyRoute = InfoFAQLazyImport.update({
+const InfoFAQLazyRoute = InfoFAQLazyRouteImport.update({
   id: '/info/FAQ',
   path: '/info/FAQ',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/info/FAQ.lazy').then((d) => d.Route))
-
-const CollectionsOldLazyRoute = CollectionsOldLazyImport.update({
-  id: '/collections/old',
-  path: '/collections/old',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/collections/old.lazy').then((d) => d.Route),
-)
-
-const CollectionsNewLazyRoute = CollectionsNewLazyImport.update({
-  id: '/collections/new',
-  path: '/collections/new',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/collections/new.lazy').then((d) => d.Route),
-)
-
-const CollectionsAllLazyRoute = CollectionsAllLazyImport.update({
+const CollectionsAllLazyRoute = CollectionsAllLazyRouteImport.update({
   id: '/collections/all',
   path: '/collections/all',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any).lazy(() =>
   import('./routes/collections/all.lazy').then((d) => d.Route),
 )
-
-const AccountUpdatePasswordLazyRoute = AccountUpdatePasswordLazyImport.update({
-  id: '/account/update-password',
-  path: '/account/update-password',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() =>
-  import('./routes/account/update-password.lazy').then((d) => d.Route),
-)
-
-const ProductsProductIdRoute = ProductsProductIdImport.update({
+const AccountUpdatePasswordLazyRoute =
+  AccountUpdatePasswordLazyRouteImport.update({
+    id: '/account/update-password',
+    path: '/account/update-password',
+    getParentRoute: () => rootRouteImport,
+  } as any).lazy(() =>
+    import('./routes/account/update-password.lazy').then((d) => d.Route),
+  )
+const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
   id: '/products/$productId',
   path: '/products/$productId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PaymentSuccessfulRoute = PaymentSuccessfulImport.update({
-  id: '/payment/successful',
-  path: '/payment/successful',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const CollectionsSoldoutRoute = CollectionsSoldoutImport.update({
+const CollectionsSoldoutRoute = CollectionsSoldoutRouteImport.update({
   id: '/collections/soldout',
   path: '/collections/soldout',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const CollectionsAccessoriesRoute = CollectionsAccessoriesImport.update({
+const CollectionsOldRoute = CollectionsOldRouteImport.update({
+  id: '/collections/old',
+  path: '/collections/old',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsNewRoute = CollectionsNewRouteImport.update({
+  id: '/collections/new',
+  path: '/collections/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsAccessoriesRoute = CollectionsAccessoriesRouteImport.update({
   id: '/collections/accessories',
   path: '/collections/accessories',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AccountUpdateInformationRoute = AccountUpdateInformationImport.update({
-  id: '/account/update-information',
-  path: '/account/update-information',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AccountRegisterRoute = AccountRegisterImport.update({
+const AccountUpdateInformationRoute =
+  AccountUpdateInformationRouteImport.update({
+    id: '/account/update-information',
+    path: '/account/update-information',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AccountRegisterRoute = AccountRegisterRouteImport.update({
   id: '/account/register',
   path: '/account/register',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/account/register': {
-      id: '/account/register'
-      path: '/account/register'
-      fullPath: '/account/register'
-      preLoaderRoute: typeof AccountRegisterImport
-      parentRoute: typeof rootRoute
-    }
-    '/account/update-information': {
-      id: '/account/update-information'
-      path: '/account/update-information'
-      fullPath: '/account/update-information'
-      preLoaderRoute: typeof AccountUpdateInformationImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/accessories': {
-      id: '/collections/accessories'
-      path: '/collections/accessories'
-      fullPath: '/collections/accessories'
-      preLoaderRoute: typeof CollectionsAccessoriesImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/soldout': {
-      id: '/collections/soldout'
-      path: '/collections/soldout'
-      fullPath: '/collections/soldout'
-      preLoaderRoute: typeof CollectionsSoldoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/payment/successful': {
-      id: '/payment/successful'
-      path: '/payment/successful'
-      fullPath: '/payment/successful'
-      preLoaderRoute: typeof PaymentSuccessfulImport
-      parentRoute: typeof rootRoute
-    }
-    '/products/$productId': {
-      id: '/products/$productId'
-      path: '/products/$productId'
-      fullPath: '/products/$productId'
-      preLoaderRoute: typeof ProductsProductIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/account/update-password': {
-      id: '/account/update-password'
-      path: '/account/update-password'
-      fullPath: '/account/update-password'
-      preLoaderRoute: typeof AccountUpdatePasswordLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/all': {
-      id: '/collections/all'
-      path: '/collections/all'
-      fullPath: '/collections/all'
-      preLoaderRoute: typeof CollectionsAllLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/new': {
-      id: '/collections/new'
-      path: '/collections/new'
-      fullPath: '/collections/new'
-      preLoaderRoute: typeof CollectionsNewLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/collections/old': {
-      id: '/collections/old'
-      path: '/collections/old'
-      fullPath: '/collections/old'
-      preLoaderRoute: typeof CollectionsOldLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/info/FAQ': {
-      id: '/info/FAQ'
-      path: '/info/FAQ'
-      fullPath: '/info/FAQ'
-      preLoaderRoute: typeof InfoFAQLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/info/about': {
-      id: '/info/about'
-      path: '/info/about'
-      fullPath: '/info/about'
-      preLoaderRoute: typeof InfoAboutLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/policy/privacy-policy': {
-      id: '/policy/privacy-policy'
-      path: '/policy/privacy-policy'
-      fullPath: '/policy/privacy-policy'
-      preLoaderRoute: typeof PolicyPrivacyPolicyLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/policy/refund-policy': {
-      id: '/policy/refund-policy'
-      path: '/policy/refund-policy'
-      fullPath: '/policy/refund-policy'
-      preLoaderRoute: typeof PolicyRefundPolicyLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/policy/shipping-policy': {
-      id: '/policy/shipping-policy'
-      path: '/policy/shipping-policy'
-      fullPath: '/policy/shipping-policy'
-      preLoaderRoute: typeof PolicyShippingPolicyLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/policy/terms-conditions': {
-      id: '/policy/terms-conditions'
-      path: '/policy/terms-conditions'
-      fullPath: '/policy/terms-conditions'
-      preLoaderRoute: typeof PolicyTermsConditionsLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/account/': {
-      id: '/account/'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AccountIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account/register': typeof AccountRegisterRoute
   '/account/update-information': typeof AccountUpdateInformationRoute
   '/collections/accessories': typeof CollectionsAccessoriesRoute
+  '/collections/new': typeof CollectionsNewRoute
+  '/collections/old': typeof CollectionsOldRoute
   '/collections/soldout': typeof CollectionsSoldoutRoute
-  '/payment/successful': typeof PaymentSuccessfulRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/account/update-password': typeof AccountUpdatePasswordLazyRoute
   '/collections/all': typeof CollectionsAllLazyRoute
-  '/collections/new': typeof CollectionsNewLazyRoute
-  '/collections/old': typeof CollectionsOldLazyRoute
   '/info/FAQ': typeof InfoFAQLazyRoute
   '/info/about': typeof InfoAboutLazyRoute
+  '/payment/successful': typeof PaymentSuccessfulLazyRoute
   '/policy/privacy-policy': typeof PolicyPrivacyPolicyLazyRoute
   '/policy/refund-policy': typeof PolicyRefundPolicyLazyRoute
   '/policy/shipping-policy': typeof PolicyShippingPolicyLazyRoute
   '/policy/terms-conditions': typeof PolicyTermsConditionsLazyRoute
   '/account': typeof AccountIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account/register': typeof AccountRegisterRoute
   '/account/update-information': typeof AccountUpdateInformationRoute
   '/collections/accessories': typeof CollectionsAccessoriesRoute
+  '/collections/new': typeof CollectionsNewRoute
+  '/collections/old': typeof CollectionsOldRoute
   '/collections/soldout': typeof CollectionsSoldoutRoute
-  '/payment/successful': typeof PaymentSuccessfulRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/account/update-password': typeof AccountUpdatePasswordLazyRoute
   '/collections/all': typeof CollectionsAllLazyRoute
-  '/collections/new': typeof CollectionsNewLazyRoute
-  '/collections/old': typeof CollectionsOldLazyRoute
   '/info/FAQ': typeof InfoFAQLazyRoute
   '/info/about': typeof InfoAboutLazyRoute
+  '/payment/successful': typeof PaymentSuccessfulLazyRoute
   '/policy/privacy-policy': typeof PolicyPrivacyPolicyLazyRoute
   '/policy/refund-policy': typeof PolicyRefundPolicyLazyRoute
   '/policy/shipping-policy': typeof PolicyShippingPolicyLazyRoute
   '/policy/terms-conditions': typeof PolicyTermsConditionsLazyRoute
   '/account': typeof AccountIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account/register': typeof AccountRegisterRoute
   '/account/update-information': typeof AccountUpdateInformationRoute
   '/collections/accessories': typeof CollectionsAccessoriesRoute
+  '/collections/new': typeof CollectionsNewRoute
+  '/collections/old': typeof CollectionsOldRoute
   '/collections/soldout': typeof CollectionsSoldoutRoute
-  '/payment/successful': typeof PaymentSuccessfulRoute
   '/products/$productId': typeof ProductsProductIdRoute
   '/account/update-password': typeof AccountUpdatePasswordLazyRoute
   '/collections/all': typeof CollectionsAllLazyRoute
-  '/collections/new': typeof CollectionsNewLazyRoute
-  '/collections/old': typeof CollectionsOldLazyRoute
   '/info/FAQ': typeof InfoFAQLazyRoute
   '/info/about': typeof InfoAboutLazyRoute
+  '/payment/successful': typeof PaymentSuccessfulLazyRoute
   '/policy/privacy-policy': typeof PolicyPrivacyPolicyLazyRoute
   '/policy/refund-policy': typeof PolicyRefundPolicyLazyRoute
   '/policy/shipping-policy': typeof PolicyShippingPolicyLazyRoute
   '/policy/terms-conditions': typeof PolicyTermsConditionsLazyRoute
   '/account/': typeof AccountIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -375,15 +220,15 @@ export interface FileRouteTypes {
     | '/account/register'
     | '/account/update-information'
     | '/collections/accessories'
+    | '/collections/new'
+    | '/collections/old'
     | '/collections/soldout'
-    | '/payment/successful'
     | '/products/$productId'
     | '/account/update-password'
     | '/collections/all'
-    | '/collections/new'
-    | '/collections/old'
     | '/info/FAQ'
     | '/info/about'
+    | '/payment/successful'
     | '/policy/privacy-policy'
     | '/policy/refund-policy'
     | '/policy/shipping-policy'
@@ -395,15 +240,15 @@ export interface FileRouteTypes {
     | '/account/register'
     | '/account/update-information'
     | '/collections/accessories'
+    | '/collections/new'
+    | '/collections/old'
     | '/collections/soldout'
-    | '/payment/successful'
     | '/products/$productId'
     | '/account/update-password'
     | '/collections/all'
-    | '/collections/new'
-    | '/collections/old'
     | '/info/FAQ'
     | '/info/about'
+    | '/payment/successful'
     | '/policy/privacy-policy'
     | '/policy/refund-policy'
     | '/policy/shipping-policy'
@@ -415,15 +260,15 @@ export interface FileRouteTypes {
     | '/account/register'
     | '/account/update-information'
     | '/collections/accessories'
+    | '/collections/new'
+    | '/collections/old'
     | '/collections/soldout'
-    | '/payment/successful'
     | '/products/$productId'
     | '/account/update-password'
     | '/collections/all'
-    | '/collections/new'
-    | '/collections/old'
     | '/info/FAQ'
     | '/info/about'
+    | '/payment/successful'
     | '/policy/privacy-policy'
     | '/policy/refund-policy'
     | '/policy/shipping-policy'
@@ -431,21 +276,20 @@ export interface FileRouteTypes {
     | '/account/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRegisterRoute: typeof AccountRegisterRoute
   AccountUpdateInformationRoute: typeof AccountUpdateInformationRoute
   CollectionsAccessoriesRoute: typeof CollectionsAccessoriesRoute
+  CollectionsNewRoute: typeof CollectionsNewRoute
+  CollectionsOldRoute: typeof CollectionsOldRoute
   CollectionsSoldoutRoute: typeof CollectionsSoldoutRoute
-  PaymentSuccessfulRoute: typeof PaymentSuccessfulRoute
   ProductsProductIdRoute: typeof ProductsProductIdRoute
   AccountUpdatePasswordLazyRoute: typeof AccountUpdatePasswordLazyRoute
   CollectionsAllLazyRoute: typeof CollectionsAllLazyRoute
-  CollectionsNewLazyRoute: typeof CollectionsNewLazyRoute
-  CollectionsOldLazyRoute: typeof CollectionsOldLazyRoute
   InfoFAQLazyRoute: typeof InfoFAQLazyRoute
   InfoAboutLazyRoute: typeof InfoAboutLazyRoute
+  PaymentSuccessfulLazyRoute: typeof PaymentSuccessfulLazyRoute
   PolicyPrivacyPolicyLazyRoute: typeof PolicyPrivacyPolicyLazyRoute
   PolicyRefundPolicyLazyRoute: typeof PolicyRefundPolicyLazyRoute
   PolicyShippingPolicyLazyRoute: typeof PolicyShippingPolicyLazyRoute
@@ -453,111 +297,166 @@ export interface RootRouteChildren {
   AccountIndexRoute: typeof AccountIndexRoute
 }
 
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/': {
+      id: '/account/'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy/terms-conditions': {
+      id: '/policy/terms-conditions'
+      path: '/policy/terms-conditions'
+      fullPath: '/policy/terms-conditions'
+      preLoaderRoute: typeof PolicyTermsConditionsLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy/shipping-policy': {
+      id: '/policy/shipping-policy'
+      path: '/policy/shipping-policy'
+      fullPath: '/policy/shipping-policy'
+      preLoaderRoute: typeof PolicyShippingPolicyLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy/refund-policy': {
+      id: '/policy/refund-policy'
+      path: '/policy/refund-policy'
+      fullPath: '/policy/refund-policy'
+      preLoaderRoute: typeof PolicyRefundPolicyLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policy/privacy-policy': {
+      id: '/policy/privacy-policy'
+      path: '/policy/privacy-policy'
+      fullPath: '/policy/privacy-policy'
+      preLoaderRoute: typeof PolicyPrivacyPolicyLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment/successful': {
+      id: '/payment/successful'
+      path: '/payment/successful'
+      fullPath: '/payment/successful'
+      preLoaderRoute: typeof PaymentSuccessfulLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/about': {
+      id: '/info/about'
+      path: '/info/about'
+      fullPath: '/info/about'
+      preLoaderRoute: typeof InfoAboutLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info/FAQ': {
+      id: '/info/FAQ'
+      path: '/info/FAQ'
+      fullPath: '/info/FAQ'
+      preLoaderRoute: typeof InfoFAQLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/all': {
+      id: '/collections/all'
+      path: '/collections/all'
+      fullPath: '/collections/all'
+      preLoaderRoute: typeof CollectionsAllLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/update-password': {
+      id: '/account/update-password'
+      path: '/account/update-password'
+      fullPath: '/account/update-password'
+      preLoaderRoute: typeof AccountUpdatePasswordLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$productId': {
+      id: '/products/$productId'
+      path: '/products/$productId'
+      fullPath: '/products/$productId'
+      preLoaderRoute: typeof ProductsProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/soldout': {
+      id: '/collections/soldout'
+      path: '/collections/soldout'
+      fullPath: '/collections/soldout'
+      preLoaderRoute: typeof CollectionsSoldoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/old': {
+      id: '/collections/old'
+      path: '/collections/old'
+      fullPath: '/collections/old'
+      preLoaderRoute: typeof CollectionsOldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/new': {
+      id: '/collections/new'
+      path: '/collections/new'
+      fullPath: '/collections/new'
+      preLoaderRoute: typeof CollectionsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/accessories': {
+      id: '/collections/accessories'
+      path: '/collections/accessories'
+      fullPath: '/collections/accessories'
+      preLoaderRoute: typeof CollectionsAccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/update-information': {
+      id: '/account/update-information'
+      path: '/account/update-information'
+      fullPath: '/account/update-information'
+      preLoaderRoute: typeof AccountUpdateInformationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/register': {
+      id: '/account/register'
+      path: '/account/register'
+      fullPath: '/account/register'
+      preLoaderRoute: typeof AccountRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRegisterRoute: AccountRegisterRoute,
   AccountUpdateInformationRoute: AccountUpdateInformationRoute,
   CollectionsAccessoriesRoute: CollectionsAccessoriesRoute,
+  CollectionsNewRoute: CollectionsNewRoute,
+  CollectionsOldRoute: CollectionsOldRoute,
   CollectionsSoldoutRoute: CollectionsSoldoutRoute,
-  PaymentSuccessfulRoute: PaymentSuccessfulRoute,
   ProductsProductIdRoute: ProductsProductIdRoute,
   AccountUpdatePasswordLazyRoute: AccountUpdatePasswordLazyRoute,
   CollectionsAllLazyRoute: CollectionsAllLazyRoute,
-  CollectionsNewLazyRoute: CollectionsNewLazyRoute,
-  CollectionsOldLazyRoute: CollectionsOldLazyRoute,
   InfoFAQLazyRoute: InfoFAQLazyRoute,
   InfoAboutLazyRoute: InfoAboutLazyRoute,
+  PaymentSuccessfulLazyRoute: PaymentSuccessfulLazyRoute,
   PolicyPrivacyPolicyLazyRoute: PolicyPrivacyPolicyLazyRoute,
   PolicyRefundPolicyLazyRoute: PolicyRefundPolicyLazyRoute,
   PolicyShippingPolicyLazyRoute: PolicyShippingPolicyLazyRoute,
   PolicyTermsConditionsLazyRoute: PolicyTermsConditionsLazyRoute,
   AccountIndexRoute: AccountIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
 
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/account/register",
-        "/account/update-information",
-        "/collections/accessories",
-        "/collections/soldout",
-        "/payment/successful",
-        "/products/$productId",
-        "/account/update-password",
-        "/collections/all",
-        "/collections/new",
-        "/collections/old",
-        "/info/FAQ",
-        "/info/about",
-        "/policy/privacy-policy",
-        "/policy/refund-policy",
-        "/policy/shipping-policy",
-        "/policy/terms-conditions",
-        "/account/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/account/register": {
-      "filePath": "account/register.tsx"
-    },
-    "/account/update-information": {
-      "filePath": "account/update-information.tsx"
-    },
-    "/collections/accessories": {
-      "filePath": "collections/accessories.tsx"
-    },
-    "/collections/soldout": {
-      "filePath": "collections/soldout.tsx"
-    },
-    "/payment/successful": {
-      "filePath": "payment/successful.tsx"
-    },
-    "/products/$productId": {
-      "filePath": "products/$productId.tsx"
-    },
-    "/account/update-password": {
-      "filePath": "account/update-password.lazy.tsx"
-    },
-    "/collections/all": {
-      "filePath": "collections/all.lazy.tsx"
-    },
-    "/collections/new": {
-      "filePath": "collections/new.lazy.tsx"
-    },
-    "/collections/old": {
-      "filePath": "collections/old.lazy.tsx"
-    },
-    "/info/FAQ": {
-      "filePath": "info/FAQ.lazy.tsx"
-    },
-    "/info/about": {
-      "filePath": "info/about.lazy.tsx"
-    },
-    "/policy/privacy-policy": {
-      "filePath": "policy/privacy-policy.lazy.tsx"
-    },
-    "/policy/refund-policy": {
-      "filePath": "policy/refund-policy.lazy.tsx"
-    },
-    "/policy/shipping-policy": {
-      "filePath": "policy/shipping-policy.lazy.tsx"
-    },
-    "/policy/terms-conditions": {
-      "filePath": "policy/terms-conditions.lazy.tsx"
-    },
-    "/account/": {
-      "filePath": "account/index.tsx"
-    }
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
-ROUTE_MANIFEST_END */
