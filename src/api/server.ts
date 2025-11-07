@@ -10,7 +10,12 @@ import { cancelRefund, createFullRefundOrder } from './stripe/refund'
 
 new Elysia()
     .use(cors({
-        origin: '*',
+        origin: [
+            'https://omocat-remake.khoi-w04.workers.dev',
+            'https://omocat-remake.khoiwn04.com',
+            'http://localhost:4173',
+            'http://localhost:3000'
+        ],
         methods: ['GET', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }))
@@ -22,4 +27,9 @@ new Elysia()
     .post('/update-account', (request: Request) => updateInformation(request))
     .post('/create-checkout-session', (request: Request) => createCheckoutSession(request))
     .post('/capture-checkout-session', (request: Request) => captureCheckout(request))
-    .listen(3001)    
+    .listen(3001)
+
+// CLOUDFLARE WORKER
+// export default {
+//     fetch: app.fetch
+// }

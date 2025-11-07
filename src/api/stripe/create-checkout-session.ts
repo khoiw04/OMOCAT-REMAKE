@@ -1,7 +1,7 @@
 // https://docs.stripe.com/payments/bank-transfers/accept-a-payment?invoices=with
 // https://docs.stripe.com/payments/collect-addresses?payment-ui=stripe-hosted&lang=node
 // Dynamic Shipping Ratesh: https://docs.stripe.com/payments/checkout/custom-shipping-options?payment-ui=embedded-form&server-lang=node
-import { stripe } from "@/api/stripe/!_main_!"
+import { stripe } from "./!_main_!"
 
 interface Item {
     max: number

@@ -9,3 +9,8 @@ archive
 .vscode
 anchor.toml
 .env
+.wrangler
+.gitignore
+src/api/README.md
+src/api/package.json
+bun.lock

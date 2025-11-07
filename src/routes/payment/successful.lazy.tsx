@@ -13,7 +13,7 @@ function PaymentSuccessful() {
   useEffect(() => resetCart() ,[])
   useEffect(() => {
     (async () => {
-      await fetch('/capture-checkout-session', {
+      await fetch('https://omocat-stripe.khoi-w04.workers.dev/capture-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

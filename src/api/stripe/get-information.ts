@@ -1,4 +1,4 @@
-import { stripe } from "@/api/stripe/!_main_!"
+import { stripe } from "./!_main_!"
 
 export async function getInformation(request: Request): Promise<Response> {
     const { email } = request.body as unknown as { email: string }

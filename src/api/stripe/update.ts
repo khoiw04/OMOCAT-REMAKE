@@ -1,5 +1,5 @@
 import { address } from "ip"
-import { stripe } from "@/api/stripe/!_main_!"
+import { stripe } from "./!_main_!"
 
 type Information = {
     first: string;

@@ -1,4 +1,4 @@
-import { stripe } from "@/api/stripe/!_main_!"
+import { stripe } from "./!_main_!"
 
 type Information = {
     email: string;

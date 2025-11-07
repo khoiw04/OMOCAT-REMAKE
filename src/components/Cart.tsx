@@ -147,7 +147,7 @@ export default function Cart() {
         {
             mutationKey: ['Adding_CART', cart],
             mutationFn: async (s: Value) => {
-                const response = await fetch('/create-checkout-session', {
+                const response = await fetch('https://omocat-stripe.khoi-w04.workers.dev/create-checkout-session', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-import { stripe } from "@/api/stripe/!_main_!"
+import { stripe } from "./!_main_!"
 
 const endpointSecret = process.env.STRIPE_DESTINATION_KEY as string
 
