@@ -79,7 +79,7 @@ function Register() {
       mutationKey: ['register'],
       mutationFn: async (data: LogUp) => {
         await Promise.all([
-          fetch('/create-account', {
+          fetch('https://api-billowing-wildflower-2154.fly.dev/create-account', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
